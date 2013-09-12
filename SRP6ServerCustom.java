@@ -25,7 +25,8 @@ public class SRP6ServerCustom extends SRP6Server {
 	public boolean verifyClientEvidenceMessage(BigInteger clientM1) throws CryptoException{
 		//verify pre-requirements
 		if ((this.A==null)||(this.B==null)||(this.S==null)){
-			throw new CryptoException("Impossible to compute and verify M1: some data are missing from the previous operations (A,B,S)");
+			throw new CryptoException("Impossible to compute and verify M1: " +
+					"some data are missing from the previous operations (A,B,S)");
 		}
 		// Compute the own client evidence message 'M1'
 		BigInteger computedM1 = SRP6UtilCustom.calculateM1(digest, A, B, S);
@@ -45,7 +46,8 @@ public class SRP6ServerCustom extends SRP6Server {
 	public BigInteger calculateServerEvidenceMessage() throws CryptoException{
 		//verify pre-requirements
 		if ((this.A==null)||(this.M1==null)||(this.S==null)){
-			throw new CryptoException("Impossible to compute M2: some data are missing from the previous operations (A,M1,S)");
+			throw new CryptoException("Impossible to compute M2: " +
+					"some data are missing from the previous operations (A,M1,S)");
 		}
 		// Compute the server evidence message 'M2'
 		this.M2 = SRP6UtilCustom.calculateM2(digest, A, M1, S);  
@@ -61,7 +63,8 @@ public class SRP6ServerCustom extends SRP6Server {
 	public BigInteger calculateSessionKey() throws CryptoException{
 		//verify pre-requirements
 		if ((this.S==null)||(this.M1==null)||(this.M2==null)){
-			throw new CryptoException("Impossible to compute Key: some data are missing from the previous operations (S,M1,M2)");
+			throw new CryptoException("Impossible to compute Key: " +
+					"some data are missing from the previous operations (S,M1,M2)");
 		}
 		this.Key = SRP6UtilCustom.calculateKey(digest,S);
 		return Key;
