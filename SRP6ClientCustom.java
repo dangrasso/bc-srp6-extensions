@@ -23,7 +23,7 @@ public class SRP6ClientCustom extends SRP6Client {
 	public BigInteger calculateClientEvidenceMessage() throws CryptoException{
 		// verify pre-requirements
 		if ((this.A==null)||(this.B==null)||(this.S==null)){
-			throw new CryptoException("Impossible to compute M2: some data are missing from the previous operations (A,M1,S)");
+			throw new CryptoException("Impossible to compute M1: some data are missing from the previous operations (A,B,S)");
 		}
 		// compute the client evidence message 'M1'
 		this.M1 = SRP6UtilCustom.calculateM1(digest, A, M1, S);  
